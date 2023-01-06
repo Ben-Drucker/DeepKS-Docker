@@ -1,5 +1,4 @@
 version: 0.0.1
-
 services:
   tunnel-server:
     container_name: vs-container
