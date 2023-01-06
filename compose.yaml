@@ -1,0 +1,13 @@
+version: 0.0.1
+
+services:
+  tunnel-server:
+    container_name: vs-container
+    image: vs-image
+    build:
+      context: tunnel-server
+      dockerfile: ./Dockerfile
+      platforms:
+      - "linux/x86_64"
+      - "linux/amd64"
+      - "linux/arm64"
