@@ -24,10 +24,6 @@ RUN cd /home/ubuntu
 RUN conda config --add channels conda-forge && conda config --set channel_priority strict && conda create -n py311 python=3.11 && conda init --verbose --system zsh 
 
 RUN zsh -c 'source /root/.zshrc && conda activate py311 && pip install -r /home/ubuntu/requirements.txt'
-# RUN cat /home/ubuntu/.zshrc
-# RUN zsh -c 'conda activate py311 && pip install -r requirements.txt'
-# RUN zsh -c  'conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch-nightly -c nvidia'
-# RUN zsh -c  '/home/ubuntu/install_script.sh'
 
-# /usr/share/code/bin/code-tunnel tunnel --accept-server-license-terms
-CMD /bin/zsh 
+CMD /usr/share/code/bin/code-tunnel tunnel --accept-server-license-terms
+# CMD /bin/zsh 
