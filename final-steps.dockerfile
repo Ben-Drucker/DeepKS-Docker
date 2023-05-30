@@ -2,7 +2,7 @@
 FROM benndrucker/deepks-r:latest
 
 # Install VSCode for tunnelling
-COPY "vscode_script.sh" "vscode_script.sh"
+COPY "supporting_scripts/vscode_script.sh" "vscode_script.sh"
 RUN chmod +x vscode_script.sh
 RUN ./vscode_script.sh
 
@@ -10,10 +10,10 @@ ARG UN=dockeruser
 WORKDIR /home/$UN/docker-build
 
 ## Potentially install more dependencies after this point
-COPY "additional-pip-packages.txt" "additional-pip-packages.txt"
+COPY "supporting_scripts/additional-pip-packages.txt" "additional-pip-packages.txt"
 RUN ["/bin/zsh", "-c", "source /home/$UN/python_env/bin/activate && pip install -r /home/$UN/DeepKS/requirements.txt"]
 RUN ["/bin/zsh", "-c", "source /home/$UN/python_env/bin/activate && pip install \"MarkupSafe>=2.0\" && pip install torch --index-url https://download.pytorch.org/whl/cu118"]
-COPY "additional-apt-packages.txt" "additional-apt-packages.txt"
+COPY "supporting_scripts/additional-apt-packages.txt" "additional-apt-packages.txt"
 RUN apt-get update && apt-get install -y $(cat "additional-apt-packages.txt")
 USER $UN
 RUN cd /home/$UN/DeepKS && git pull && git switch dev && git switch main && git lfs pull && cd -
@@ -31,7 +31,7 @@ RUN usermod -aG sudo $UN
 
 USER $UN
 WORKDIR /home/$UN
-COPY "dockeruser-rc.zshrc" /home/$UN/.zshrc
+COPY "supporting_scripts/dockeruser-rc.zshrc" /home/$UN/.zshrc
 RUN chown -R $UN /home/$UN/DeepKS
 CMD /bin/zsh
 

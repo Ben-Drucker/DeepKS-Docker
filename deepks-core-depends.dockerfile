@@ -129,7 +129,7 @@ RUN git clone https://github.com/Ben-Drucker/DeepKS.git
 WORKDIR /home/$UN/docker-build
 RUN mkdir /home/$UN/python_env && python3 -m venv /home/$UN/python_env
 RUN ["/bin/zsh", "-c", "source /home/$UN/python_env/bin/activate && pip install -r /home/$UN/DeepKS/requirements.txt"]
-COPY "install-R-script.sh" "install-R-script.sh"
+COPY "supporting_scripts/install-R-script.sh" "install-R-script.sh"
 RUN chmod +x install-R-script.sh
 RUN ./install-R-script.sh
 RUN chown -R $UN /usr/local/lib/R/site-library /home/$UN/DeepKS /home/$UN/python_env
