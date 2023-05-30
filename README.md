@@ -7,6 +7,10 @@
 |      2      |`deepks-core-depends.dockerfile`| Downloads and installs the basic `apt-get` packages, the DeepKS repository, python, etc., required for DeepKS.| `deepks-core-depends`|
 |      3      |`final-steps.dockerfile`| Downloads VS Code, any additional pip or apt packages needed since building core dependences, and creates a "graceful presentation"/welcome message in the shell for the end-user. | `deepks` |
 
+## Supporting Scripts
+
+Files in the `supporting_scripts` directory contain (sometimes lengthy) instructions for preparing specific components of the resulting Docker image. For example, `supporting_scripts/install-R-script.sh` defines how to install R and enable a rapid method ([r2u](https://eddelbuettel.github.io/r2u/)) of obtaining packages.
+
 ## To re-build the final image 
 In the following order, execute:
 
