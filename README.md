@@ -32,7 +32,7 @@ docker buildx build --platform linux/arm64,linux/amd64 -f final-steps.dockerfile
 ```
 making sure to replace the `X.Y.Z` in the first three lines with the version number (e.g., `0.2.0`).
 
-Each of these builds may be lengthy since they are multi-platform builds; I.e., the builds are created for both ARM and x86_64 platforms. Hence, if making changes to the dockerfiles or associated scripts, one may want to build only for their computer's native architecture. To do this, execute:
+Each of these builds may be lengthy since they are multi-platform. That is, the builds are created for both ARM and x86_64 platforms. Hence, when making changes to the dockerfiles or supporting scripts, it's a good idea to test the dockerfiles. One should test the dockerfiles by `build`ing for only their computer's native architecture. To do this, execute:
 
 ```bash
 docker build -f r.dockerfile -t benndrucker/deepks-r:latest . # Example for the `r.dockerfile` build
