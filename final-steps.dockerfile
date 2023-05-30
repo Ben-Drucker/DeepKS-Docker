@@ -1,5 +1,5 @@
 # Setup
-FROM benndrucker/deepks-core-depends:0.0.0
+FROM benndrucker/deepks-r:latest
 
 # Install VSCode for tunnelling
 COPY "vscode_script.sh" "vscode_script.sh"
@@ -19,12 +19,6 @@ USER $UN
 RUN cd /home/$UN/DeepKS && git pull && git switch dev && git switch main && git lfs pull && cd -
 USER root
 
-# COPY "cuda_script.sh" "cuda_script.sh"
-# RUN chmod +x "cuda_script.sh"
-# RUN ./cuda_script.sh
-# COPY "additional-R-packages.R" "additional-R-packages.R"
-# RUN Rscript additional-R-packages.R
-
 # Install cuda-related items
 # COPY "cuda_script.sh" "cuda_script.sh"
 # RUN chmod +x cuda_script.sh
@@ -38,12 +32,13 @@ RUN usermod -aG sudo $UN
 USER $UN
 WORKDIR /home/$UN
 COPY "dockeruser-rc.zshrc" /home/$UN/.zshrc
+RUN chown -R $UN /home/$UN/DeepKS
 CMD /bin/zsh
 
 # Build command: 
 
 # Test on native arch first...
-# docker build -f final-steps.dockerfile -t benndrucker/deepks:VERSION -t benndrucker/deepks:latest .
+# docker build -f final-steps.dockerfile -t benndrucker/deepks:0.2.0 -t benndrucker/deepks:latest .
 
 # Then build for multiple architectures...
-# docker buildx build -f final-steps.dockerfile --platform linux/arm64,linux/amd64 --load -t benndrucker/deepks:VERSION -t benndrucker/deepks:latest .
+# docker buildx build -f final-steps.dockerfile --platform linux/arm64,linux/amd64 --push -t benndrucker/deepks:VERSION -t benndrucker/deepks:latest .

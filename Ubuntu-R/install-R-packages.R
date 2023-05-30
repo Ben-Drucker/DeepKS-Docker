@@ -1,3 +1,4 @@
+install.packages('bspm')
 pkg_list <- c("dplyr",
 "tidyverse",
 "readxl",
@@ -13,12 +14,15 @@ pkg_list <- c("dplyr",
 "grImport2",
 "rsvg",
 "broman",
-"numbers")
+"numbers",
+"devtools",
+"Cairo")
 
 bio_pkg_list <- c("Biostrings", "seqinr", "DECIPHER")
 
-install.packages(pkg_list, dependencies = TRUE)
+install.packages(pkg_list, dependencies = TRUE, NCpus = 8)
+devtools::install_version('rlang', ">= 1.1.1")
 
 for (bio_pkg in bio_pkg_list){
-    BiocManager::install(biopkg)
+    BiocManager::install(bio_pkg)
 }
