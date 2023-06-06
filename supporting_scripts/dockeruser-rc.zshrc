@@ -1,4 +1,4 @@
-export UN=$(whoami) 
+export UN='dockeruser'
 source /home/$UN/python_env/bin/activate
 export PS1="%n@%m [%3~] ▷ "
 export CUBLAS_WORKSPACE_CONFIG=:4096:8
